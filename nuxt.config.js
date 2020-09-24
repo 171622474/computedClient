@@ -20,7 +20,10 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/element-ui'
+    {
+      src:'@/plugins/element-ui',
+      ssr: true
+    },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -34,8 +37,12 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources'
 
   ],
+  styleResources: {
+    scss: '~assets/css/variable.scss'
+  },  
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
@@ -45,7 +52,7 @@ export default {
 
 proxy: {
   '/api/': {
-    target: 'https://maoyan.com/',
+    target: 'https://www.csdn.net',
     pathRewrite: {
       '^/api/': ''
     }

@@ -1,17 +1,16 @@
 <template lang="pug">
   .header
-    //- .header_nav
-      //- .logo computed.cn
-      //- .nav 首页
-      //- .search
-      //-   el-input(v-model="value" placeholder="搜索")
-      //- .login 登录注册
     el-row(type="flex" justify="space-between" align="middle").header_nav
-      el-col.logo(:span="4") computed.cn
-      el-col(:span="2") 首页
+      el-col.logo(:span="4") 
+        span computed
+        span .cn
+      el-col.nav(:span="2")
+        span 首页
       el-col(:span="4",:offset="4") 
         el-input(v-model="value" placeholder="搜索")
-      el-col(:span="6" :offset="2") 登录注册
+      el-col(:span="6" :offset="2")
+        el-button(size="small",type="primary",round) 写文章
+        el-button(size="small",round) 登录
 </template>
 
 <script>
@@ -34,13 +33,29 @@ export default {
     // background-color: #fff;   
     box-shadow: 0 2px 10px rgba(0,0,0,.05); 
       .header_nav{
-        min-width: 900px;
-        max-width: 1200px;
+        width: $centerWidth;
         height: 100%;
         margin: 0 auto;
         .logo{
           font-size: 24px;
           font-weight: bold;
+          // background: linear-gradient(180deg, #000 0%, #009a61 100%) top center/100% 100% no-repeat;
+          // background-attachment: local;//背景跟随滚动
+          // -webkit-background-clip: text;//背景显示在文字笔画区域
+          // background-clip: text;
+          // color: transparent;//文字颜色设置为透明
+          & > span:nth-child(1){
+            // color: $color;
+            color: #000;
+          }
+          & > span:nth-child(2){
+            color: $color;
+          }
+        }
+        .nav{
+          color: $color;
+          font-weight: bold;
+          cursor: pointer;
         }
       }
 }

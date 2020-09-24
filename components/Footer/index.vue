@@ -8,10 +8,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .footer {
-    min-width: 900px;
-    max-width: 1200px;
+    width: $centerWidth;
     height: 50px;
     margin: 0 auto;
 }

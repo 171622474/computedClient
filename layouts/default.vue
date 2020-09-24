@@ -20,12 +20,10 @@
   .nuxt{
     position: relative;
     z-index: 8;
-    min-width: 900px;
-    max-width: 1200px;
+    width: $centerWidth;
     height: 100%;
     margin: 0 auto;
-    height: auto;
-    margin-top: 50px;
+    margin-top: 60px;
   }
 }
 </style>

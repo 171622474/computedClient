@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/style-resources": "^1.0.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "moment": "^2.29.0",
     "nuxt": "^2.14.5"
   },
   "devDependencies": {
