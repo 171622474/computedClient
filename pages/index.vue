@@ -1,7 +1,10 @@
 <template lang="pug">
   .container
     el-row(:gutter="10")
-      el-col(:xs="18" :sm="18" :md="18" :lg="18" :xl="18") 
+      el-col(:xs="3" :sm="3" :md="3" :lg="3" :xl="3") 
+        .container_menu
+          Menu
+      el-col(:xs="15" :sm="15" :md="15" :lg="15" :xl="15") 
         .container_left
           //- 文章页
           ArticleList(:list="articles")
@@ -14,6 +17,7 @@
 
 <script>
 import Additional from '~/components/Additional'
+import Menu from '~/components/Menu'
 export default {
   layout: 'default',
   name:'index',
@@ -29,7 +33,8 @@ export default {
     }
   },
   components:{
-    Additional
+    Additional,
+    Menu
   },
   asyncData(content){
     return content.$axios.get('api/articles?type=more&category=web&shown_offset=1600936156016479').then(res=>{
@@ -48,6 +53,11 @@ export default {
 <style lang="scss" scoped>
 .container{
   width: 100%;
+  .container_menu{
+    // position: absolute;
+    // top: 0;
+
+  }
   .container_left{
     box-shadow: 0 2px 10px rgba(0,0,0,.06); 
     padding:15px;

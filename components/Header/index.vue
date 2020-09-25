@@ -7,7 +7,7 @@
       el-col.nav(:span="1")
         nuxt-link(to="/",tag="span") 首页
       el-col.nav(:span="2")
-        nuxt-link(to="/my",tag="span") 我的记录
+        nuxt-link(to="/my",tag="span") 我的笔记
       el-col(:span="4",:offset="3") 
         el-input(v-model="value" placeholder="搜索")
             i(class="el-icon-search el-input__icon",slot="suffix",@click="handleIconClick")
@@ -20,7 +20,7 @@
 export default {
   data(){
     return {
-      value:'aaa',
+      value:'',
     }
   },
   methods:{
