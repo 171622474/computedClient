@@ -12,7 +12,6 @@
         .container_right
           //- 额外标注
           Additional
-
 </template>
 
 <script>
