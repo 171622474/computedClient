@@ -41,8 +41,19 @@ export default {
     })
     },
   methods:{
+    // 未登录状态
+    loginDialog(){
+      this.confirm('您当前未登录, 是否前往登录?', '提示', {
+        confirmButtonText: '登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        console.log('登录');
+      })
+    }
   },
   created(){
+
     
   }
 
