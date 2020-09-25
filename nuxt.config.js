@@ -62,5 +62,10 @@ proxy: {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     transpile: [/^element-ui/],
+  },
+
+  loading:{
+    
+    color:'red'
   }
 }

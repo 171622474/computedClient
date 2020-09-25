@@ -7,30 +7,11 @@
 */
 <template>
   <div class="rili">
-    <el-date-picker
-      v-if="isDate"
-      class="el__date__picker"
-      v-model="this__date"
-      type="month"
-      placeholder="选择月"
-    ></el-date-picker>
-
     <el-calendar ref="dom" v-model="this__date" selected-day="yyyy-MM">
       <template slot="dateCell" slot-scope="{date, data}">
-        <div>
-          <span
-            :class="data.isSelected ? 'is-selected day__' : 'day__'"
-          >{{ data.day.split('-').slice(1)[1] }}</span>
-          <el-tag
-            :type="autoType(date,data).tag"
-            class="fr"
-            v-if="autoType(date,data).value"
-          >{{autoType(date,data).value}}</el-tag>
-        </div>
-        <div v-if="autoType(date,data).code === 1 || autoType(date,data).code === 2">
-          <span class="label">同步时间</span>
-          <span class="value">{{autoType(date,data).date}}</span>
-        </div>
+          <el-tooltip :content="data.day" placement="bottom" effect="light">
+            <el-tag size="mini" class="current_all" type="info">{{date | dateFilter}}</el-tag>
+          </el-tooltip>
       </template>
     </el-calendar>
   </div>
@@ -62,86 +43,18 @@ export default {
   components: {},
   data() {
     return {
-      // 选中的时间
-      this__date: moment().format('YYYY-MM-DD'),
-      // 月份 临时变量
-      temporary: moment().format('YYYY-MM'),
+      this__date:''
     };
   },
   computed: {
-    datas() {
-      const current = this.$refs.dom.curMonthDatePrefix;
-      return {
-        current,
-        currentDate: this.$refs.dom.formatedDate,
-        dateArr: this.getCurrMonthDays(),
-      };
-    },
   },
   watch: {
     // 备注:因cdn无法修改element源码 需监控月份变化emit父组件
     this__date() {
-      this.$nextTick(() => {
-        if (this.datas.current === this.temporary) {
-          console.log('unchanged');
-        } else {
-          console.log('change');
-          // 变化把最新数据给临时变量
-          this.$emit('change', this.datas);
-          this.temporary = this.datas.current;
-        }
-      });
+      this.$emit('change', this.datas);
     },
   },
   methods: {
-    /**
-     * 日历当天过滤的核心方法
-     * @param {Object} date__ 时间
-     * @param {Object} data Element数据
-     * @return {Object} value:同步名称 code: 1 = 自动同步 2 = 手动同步 3 = 未同步 tag: 同步时间
-     */
-    autoType(date__, data) {
-      const arr = this.list.filter(item => item.date === data.day);
-      let n = { value: '', code: -1 };
-      if (arr.length !== 0) {
-        // 1 = 自动同步 2 = 手动同步 3 = 未同步
-        const code = arr[0].type;
-        const date = arr[0].autoDate;
-        if (code === 1) {
-          n = {
-            value: '自动同步',
-            code: 1,
-            tag: 'success',
-            date,
-
-          };
-        } else if (code === 2) {
-          n = {
-            value: '手动同步',
-            code: 2,
-            tag: '',
-            date,
-          };
-        } else if (code === 3) {
-          n = {
-            value: '未同步',
-            code: 3,
-            tag: 'danger',
-            date,
-          };
-        }
-      }
-      return n;
-    },
-    // 当前本月，本月第一天和最后一天
-    getCurrMonthDays() {
-      const date = [];
-      const start = `${moment(this.$refs.dom.curMonthDatePrefix).add('month', 0).format('YYYY-MM')}-01`;
-      const end = moment(start).add('month', 1).add('days', -1).format('YYYY-MM-DD');
-      date.push(start);
-      date.push(end);
-      return date;
-    },
   },
   created() {
     this.$nextTick(() => this.$emit('change', this.datas));
@@ -149,6 +62,12 @@ export default {
   mounted() {
 
   },
+  filters:{
+    dateFilter(info){
+      moment(info).format('D');
+      return moment(info).format('D');
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
@@ -196,10 +115,27 @@ export default {
   font-size: 14px;
   color: #666;
 }
+.el-icon-success{
+  color: $color;
+}
+.current_num{
+  font-size: 12px;
+  color: 666;
+}
+.current_all{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 28px;
+}
 </style>
 <style>
 .el-calendar-table .el-calendar-day {
   position: relative;
   height: 55px;
+  padding:1px;
 }
 </style>

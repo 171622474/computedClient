@@ -4,10 +4,13 @@
       el-col.logo(:span="4") 
         span computed
         span .cn
+      el-col.nav(:span="1")
+        nuxt-link(to="/",tag="span") 首页
       el-col.nav(:span="2")
-        span 首页
-      el-col(:span="4",:offset="4") 
+        nuxt-link(to="/my",tag="span") 我的记录
+      el-col(:span="4",:offset="3") 
         el-input(v-model="value" placeholder="搜索")
+            i(class="el-icon-search el-input__icon",slot="suffix",@click="handleIconClick")
       el-col(:span="6" :offset="2")
         el-button(size="small",type="primary",round) 写文章
         el-button(size="small",round) 登录
@@ -17,13 +20,19 @@
 export default {
   data(){
     return {
-      value:'',
+      value:'aaa',
+    }
+  },
+  methods:{
+    handleIconClick(){
+
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 .header{
+    border-top: 2px solid $color;
     z-index: 9;
     background-color: #fff;
     position: fixed;
@@ -53,11 +62,22 @@ export default {
           }
         }
         .nav{
-          color: $color;
           font-weight: bold;
           cursor: pointer;
         }
       }
+    span.nuxt-link-exact-active{
+      color: $color;
+    }
+    span:hover{
+      color: $color;
+    }
+    .el-icon-search{
+      cursor: pointer;
+    }
+    .el-icon-search:hover{
+      color:$color;
+    }
 }
 
 </style>

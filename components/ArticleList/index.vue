@@ -1,5 +1,5 @@
 <template lang="pug">
-  .Article
+  .Article(class="infinite-list")
     div(v-for="(item,index) in list" :key="index")
         el-row.ArticleList(:gutter="0")
             el-col(:span='20')
@@ -26,6 +26,11 @@ export default {
 
         }
     },
+    methods:{
+        load(){
+            console.log(1);
+        }
+    }
 
 }
 </script>
